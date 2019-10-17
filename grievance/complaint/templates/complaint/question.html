@@ -1,0 +1,52 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
+  <title>B05 Frontend</title>
+</head>
+<body>
+<p>
+  {{success}}
+</p>
+{%if not success %}
+<form method="POST" action="{% url 'poll_question' %}" >
+  {% csrf_token %}
+
+            <div class="form-group">
+              <label for="Complaintid">ComplaintID</label>
+              <input type="text" class="form-control" name="cid">
+            </div>
+            <div class="form-group">
+              <label for="question">Question</label>
+              <input type="text" class="form-control" name="ques">
+            </div>
+            <div class="form-group">
+              <label for="time">Valid Till</label>
+              <input type="datetime-local" class="form-control" name="val_time">
+            </div>
+            <div class="form-group">
+              <label for="Complaintid">Option1</label>
+              <input type="text" class="form-control" name="Option1">
+            </div>
+            <div class="form-group">
+              <label for="Complaintid">Option2</label>
+              <input type="text" class="form-control" name="Option2">
+            </div>
+            <div class="form-group">
+              <label for="Complaintid">Option3</label>
+              <input type="text" class="form-control" name="Option3">
+            </div>
+            <div class="form-group">
+              <label for="Complaintid">Option4</label>
+              <input type="text" class="form-control" name="Option4">
+            </div>
+            </div>
+            <input type="submit" value="Next" class="btn btn-primary" data-dismiss="modal" >
+          </form>
+     {% endif %}     
+      </body>

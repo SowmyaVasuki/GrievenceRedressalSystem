@@ -1,0 +1,52 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
+  <title>B05 Frontend</title>
+</head>
+<body>
+	<p>{{ success }}</p><br>
+	<p> {{ list }}
+	{% if not success %}
+<form method="POST" action="{% url 'hostel_confirm' %}" >
+	{% csrf_token %}
+
+          	<div class="form-group">
+              <label for="subcategory">SubCategory</label>
+              <select class="form-control" name="subcat">
+              	<option value="Choose your subcategory">Choose your subcategory</option>
+                <option value="Accomodation">Accomodation</option>
+                <option value="Mess">Mess</option>
+                <option value="Transport">Transport</option>
+                <option value="Medical">Medical</option>
+                
+              </select>
+            </div>
+            <div class="form-group">
+            <label for="incharge">Hostel Incharge</label>
+              <select class="form-control" name="incharge">
+                <option value="Choose your subcategory">Choose incharge</option>
+                <option value="Sunil">Sunil</option>
+                <option value="Prasuna">Prasuna</option>                
+              </select>
+            </div>
+              <br>
+              <div class="form-group">
+            <label for="roomno">Room No.</label>
+              <input type="text" name="roomno"><br>
+            </div>
+            <div class="form-group">
+              
+              <label for="Description">Description</label>
+              
+              <textarea name="description" class="form-control"></textarea>
+            </div><br>
+            <center><input type="submit" value="Register" class="btn btn-primary" data-dismiss="modal" ></center>
+          </form>
+          {% endif %}
+      </body>

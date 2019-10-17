@@ -1,0 +1,54 @@
+
+
+<div class="container">
+  <h1 class='text-center'>Welcome to Poll List!</h1>
+  <div class="row">
+    <div class="col-sm-8 offset-sm-2">
+
+      {% if messages %}
+          {% for message in messages %}
+          <div {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+            {{message}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+             </button>
+          </div>
+          {% endfor %}
+      {% endif %}
+
+      <a
+          href="?text=True"
+          class="btn btn-{% if 'text' in request.GET %}warning{% else %}primary{% endif %}"
+          style="margin-bottom: 5px">Text
+      </a>
+      <a
+          href="?pub_date=True"
+          class="btn btn-{% if 'pub_date' in request.GET %}warning{% else %}primary{% endif %}"
+          style="margin-bottom: 5px">Pub_date
+      </a>
+      <a
+          href="?num_votes=True"
+          class="btn btn-{% if 'num_votes' in request.GET %}warning{% else %}primary{% endif %}"
+          style="margin-bottom: 5px">Num_votes
+      </a>
+      
+
+      
+
+      <ul class="list-group">
+        {% for poll in polls %}
+        <li class="list-group-item">
+          <a href="{% url 'detail' poll.id %}">{{ poll }}</a>
+          {% if request.user == poll.owner %}
+            <a href="{% url 'edit_poll' poll.id %}" class='float-right'><i class="fas fa-pencil-alt"></i></a>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+
+      
+
+    </div>
+  </div>
+</div>
+

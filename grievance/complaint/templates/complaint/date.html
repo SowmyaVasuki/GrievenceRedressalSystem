@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<table class="table table-striped">
+              <thead class="thead-dark">
+                <tr>
+                  <th>#</th>
+                  <th>ComplaintId</th>
+                  <th>Incharge</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% if pr %}
+                {% for i in pr %}
+                <tr>
+                  <td>{{ forloop.counter }}</td>
+                  <td><p>{{i.compid}}</p></td>
+                  <td>{{i.incharge}}</td>
+                  <td>{{i.description}}</td>                 
+                </tr>
+                {% endfor %}
+                {% else %}
+                <p>nothingggg</p>
+                {% endif %}
+              </tbody>
+            </table>
+</body>
+</html>

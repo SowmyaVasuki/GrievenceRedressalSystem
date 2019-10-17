@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
+  <title>B05 Frontend</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
+    <div class="container">
+      <a  class="navbar-brand"> <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/49/IIIT_Sri_City_Logo.png/220px-IIIT_Sri_City_Logo.png" style="width: 32px; height: 32px; margin-right: 8px;">IIITS</a>
+      <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        
+
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item dropdown mr-3">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+              <i class="fas fa-user"></i> Welcome {{ list }}
+            </a>
+            
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'index' %}" class="nav-link">
+              <i class="fas fa-user"></i> Logout
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <header id="main-header" class="py-2 bg-primary text-white">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/49/IIIT_Sri_City_Logo.png/220px-IIIT_Sri_City_Logo.png" style="width: 50px; height: 55px; float: left;"><h2>&nbsp;&nbsp;GRIEVANCE REDRESSAL SYSTEM</h2>
+          <div class="col-md-2"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+  		<center><h3>{{ cat }}</h3></center>
+  </div>
+
+  <!-- ACTIONS -->
+ 
+<section id="posts">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9">
+          <div class="card">
+            <div class="card-header">
+              <h4>Latest Complaints</h4>
+            </div>
+           
+            <table class="table table-striped">
+              <thead class="thead-dark">
+                <tr>
+                  <th>#</th>
+                  <th>ComplaintId</th>
+                   <th>Date</th>
+                  <th>Incharge</th>
+                  <th>Description</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% if AllList %}
+                {% for i in AllList %}
+                <tr>
+                  <td>{{ forloop.counter }}</td>
+                  <td><p>{{i.compid}}</p></td>
+                  <td><p>{{i.fidate}}</p></td>
+                  <td>{{i.incharge}}</td>
+                  <td>{{i.description}}</td>
+                  <td>
+                    <a href="{% url 'repoll' i.compid %}" class="btn btn-secondary" target="blank">
+                      <i class="fas fa-angle-double-right"></i>Resolved
+                    </a>
+                    </td> 
+                  <td>
+                    <a href="{% url 'aupoll' i.compid %}" class="btn btn-secondary" target="blank">
+                      <i class="fas fa-angle-double-right"></i>View Poll
+                    </a>
+                    </td>                 
+                </tr>
+                {% endfor %}
+                {% else %}
+                <p>nothingggg</p>
+                {% endif %}
+              </tbody>
+            </table>
+          </div>
+          <nav class="ml-4">
+              <ul class="pagination">
+                {% if AllList.has_previous %}
+                  <a href="?page=1&{{params}}">&laquo; first</a>
+                  <a href="?page={{ AllList.previous_page_number }}&{{params}}">previous</a>
+              {% endif %}
+
+              <span class="current">
+                  Page {{ AllList.number }} of {{ AllList.paginator.num_pages }}.
+              </span>
+
+              {% if AllList.has_next %}
+                  <a href="?page={{ AllList.next_page_number }}&{{params}}">next</a>
+                  <a href="?page={{ AllList.paginator.num_pages }}&{{params}}">last &raquo;</a>
+              {% endif %}
+                
+              </ul>
+            </nav>
+        </div> 
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="main-footer" class="bg-dark text-white mt-5 p-5">
+    <div class="container">
+      <div class="row">    
+        <div class="col">
+          <p class="lead text-center">
+            Copyright &copy;
+            <span id="year"></span>
+            ProjectB05
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+   <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+
+  <script>
+    // Get the current year for the copyright
+    $('#year').text(new Date().getFullYear());
+
+    CKEDITOR.replace('editor1');
+  </script>
+</body>
+
+</html>
